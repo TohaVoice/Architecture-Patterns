@@ -1,0 +1,3 @@
+rootProject.name = 'architecture-patterns'
+include 'hw01-tdd'
+
