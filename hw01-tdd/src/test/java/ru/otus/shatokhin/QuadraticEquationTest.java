@@ -57,4 +57,16 @@ public class QuadraticEquationTest {
         assertThat(roots[0]).isEqualTo(-1, withPrecision(PRECISION));
         assertThat(roots[0]).isEqualTo(roots[1], withPrecision(PRECISION));
     }
+
+    @Test
+    @DisplayName("Check A is not to equal 0")
+    public void shouldThrowExceptionWhenCoefficientAIsEqualZero() {
+        double a = 0;
+        double b = 2d;
+        double c = 1d;
+
+        assertThatThrownBy(() -> quadraticEquation.solve(a, b, c))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Coefficient may not be 0");
+    }
 }
