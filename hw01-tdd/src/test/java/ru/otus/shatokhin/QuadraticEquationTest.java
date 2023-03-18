@@ -47,9 +47,9 @@ public class QuadraticEquationTest {
     @Test
     @DisplayName("Check x^2+2x+1 = 0 out, there is one multiplicity root 2 (x1= x2 = -1)")
     void caseHasOneMultiplicityRootsTest() {
-        double a = 1d;
-        double b = 2d;
-        double c = 1d;
+        double a = 1d + 1e-10;
+        double b = 2d + 1e-10;
+        double c = 1d + 1e-10;
 
         double[] roots = quadraticEquation.solve(a, b, c);
 
