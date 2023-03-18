@@ -8,6 +8,10 @@ public class QuadraticEquation {
     }
 
     public double[] solve(double a, double b, double c) {
+        if (Math.abs(a) < precision) {
+            throw new IllegalArgumentException("Coefficient may not be 0");
+        }
+
         double d = b * b - 4 * a * c;
         if (d < -precision)
             return new double[0];
