@@ -37,11 +37,7 @@ public class QuadraticEquationTest {
         double b = 0d;
         double c = -1d;
 
-        double d = b * b - 4 * a * c;
-        double sqrt = Math.sqrt(d);
-        double x1 = (-b + sqrt) / (2 * a);
-        double x2 = (-b - sqrt) / (2 * a);
-        double[] roots = new double[]{x1, x2};
+        double[] roots = quadraticEquation.solve(a, b, c);
 
         assertEquals(2, roots.length);
         assertThat(roots[0]).isEqualTo(1, withPrecision(PRECISION));
