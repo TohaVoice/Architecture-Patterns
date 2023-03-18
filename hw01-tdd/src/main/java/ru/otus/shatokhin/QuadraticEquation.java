@@ -11,6 +11,12 @@ public class QuadraticEquation {
         if (Math.abs(a) < precision) {
             throw new IllegalArgumentException("Coefficient may not be 0");
         }
+        if (Double.isInfinite(a) || Double.isInfinite(b) || Double.isInfinite(c)) {
+            throw new IllegalArgumentException("Coefficients cannot be infinity");
+        }
+        if (Double.isNaN(a) || Double.isNaN(b) || Double.isNaN(c)) {
+            throw new IllegalArgumentException("Coefficients cannot be NaN");
+        }
 
         double d = b * b - 4 * a * c;
         if (Math.abs(d) < precision) {

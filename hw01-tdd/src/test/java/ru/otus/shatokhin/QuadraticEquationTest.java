@@ -3,6 +3,13 @@ package ru.otus.shatokhin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.*;
@@ -12,6 +19,28 @@ public class QuadraticEquationTest {
     private static final double PRECISION = 1e-6;
 
     private QuadraticEquation quadraticEquation;
+
+    private static class InfinityCoefficientArrayProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+            return Stream.of(
+                            new double[]{1d, 2d, Double.POSITIVE_INFINITY},
+                            new double[]{1d, Double.POSITIVE_INFINITY, 3d},
+                            new double[]{Double.NEGATIVE_INFINITY, 2d, 3d})
+                    .map(Arguments::of);
+        }
+    }
+
+    private static class NanCoefficientArrayProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+            return Stream.of(
+                            new double[]{1d, 2d, Double.NaN},
+                            new double[]{1d, Double.NaN, 3d},
+                            new double[]{Double.NaN, 2d, 3d})
+                    .map(Arguments::of);
+        }
+    }
 
     @BeforeEach
     void setUp() {
@@ -60,7 +89,7 @@ public class QuadraticEquationTest {
 
     @Test
     @DisplayName("Check A is not to equal 0")
-    public void shouldThrowExceptionWhenCoefficientAIsEqualZero() {
+    public void caseThrowExceptionWhenCoefficientAIsEqualToZero() {
         double a = 0;
         double b = 2d;
         double c = 1d;
@@ -69,4 +98,24 @@ public class QuadraticEquationTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Coefficient may not be 0");
     }
+
+    @DisplayName("Check coefficient cannot be infinity")
+    @ParameterizedTest()
+    @ArgumentsSource(InfinityCoefficientArrayProvider.class)
+    public void caseThrowExceptionWhenCoefficientIsInfinite(double[] coefficients) {
+        assertThatThrownBy(() ->
+                quadraticEquation.solve(coefficients[0], coefficients[1], coefficients[2]))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Coefficients cannot be infinity");
+    }
+
+    @ParameterizedTest()
+    @DisplayName("Check coefficient cannot be infinity")
+    @ArgumentsSource(NanCoefficientArrayProvider.class)
+    public void shouldThrowExceptionWhenCoefficientIsNaN(double[] coefficients) {
+        assertThatThrownBy(() -> quadraticEquation.solve(coefficients[0], coefficients[1], coefficients[2]))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Coefficients cannot be NaN");
+    }
+
 }
