@@ -99,8 +99,8 @@ public class QuadraticEquationTest {
                 .hasMessageContaining("Coefficient may not be 0");
     }
 
-    @DisplayName("Check coefficient cannot be infinity")
     @ParameterizedTest()
+    @DisplayName("Check coefficient cannot be infinity")
     @ArgumentsSource(InfinityCoefficientArrayProvider.class)
     public void caseThrowExceptionWhenCoefficientIsInfinite(double[] coefficients) {
         assertThatThrownBy(() ->
