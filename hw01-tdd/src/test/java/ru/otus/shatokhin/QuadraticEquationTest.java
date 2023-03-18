@@ -110,7 +110,7 @@ public class QuadraticEquationTest {
     }
 
     @ParameterizedTest()
-    @DisplayName("Check coefficient cannot be infinity")
+    @DisplayName("Check coefficient cannot be NaN")
     @ArgumentsSource(NanCoefficientArrayProvider.class)
     public void shouldThrowExceptionWhenCoefficientIsNaN(double[] coefficients) {
         assertThatThrownBy(() -> quadraticEquation.solve(coefficients[0], coefficients[1], coefficients[2]))
