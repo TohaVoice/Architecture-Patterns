@@ -19,7 +19,7 @@ public class QuadraticEquationTest {
     }
 
     @Test
-    @DisplayName("Check out x^2+1 = 0 has no roots")
+    @DisplayName("Check x^2+1 = 0 out, has no roots")
     void caseHasNotRootsTest() {
         double a = 1d;
         double b = 0d;
@@ -31,8 +31,8 @@ public class QuadraticEquationTest {
     }
 
     @Test
-    @DisplayName("Check out x^2-1 = 0 there are two multiplicity roots 1 (x1=1, x2=-1)")
-    void caseHasTwoRootsTest() {
+    @DisplayName("Check x^2-1 = 0 out, there are two multiplicity roots 1 (x1=1, x2=-1)")
+    void caseHasTwoMultiplicityRootsTest() {
         double a = 1d;
         double b = 0d;
         double c = -1d;
@@ -42,5 +42,19 @@ public class QuadraticEquationTest {
         assertEquals(2, roots.length);
         assertThat(roots[0]).isEqualTo(1, withPrecision(PRECISION));
         assertThat(roots[1]).isEqualTo(-1, withPrecision(PRECISION));
+    }
+
+    @Test
+    @DisplayName("Check x^2+2x+1 = 0 out, there is one multiplicity root 2 (x1= x2 = -1)")
+    void caseHasOneMultiplicityRootsTest() {
+        double a = 1d;
+        double b = 2d;
+        double c = 1d;
+
+        double[] roots = quadraticEquation.solve(a, b, c);
+
+        assertEquals(2, roots.length);
+        assertThat(roots[0]).isEqualTo(-1, withPrecision(PRECISION));
+        assertThat(roots[0]).isEqualTo(roots[1], withPrecision(PRECISION));
     }
 }
