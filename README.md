@@ -14,4 +14,4 @@ Certificate: *(will be later)*
 </details>
 
 # Modules/Homeworks
-- [TDD](https://github.com/TohaVoice)
+- [TDD](https://github.com/TohaVoice/architecture-patterns/tree/hw01-tdd/hw01-tdd)
