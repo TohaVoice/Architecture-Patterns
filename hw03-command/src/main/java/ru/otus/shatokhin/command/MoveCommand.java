@@ -10,15 +10,8 @@ import ru.otus.shatokhin.model.Vector;
 public class MoveCommand implements Command {
     private Movable movable;
 
-    private ChangeVelocityCommand changeVelocityCommand;
-
     public MoveCommand(Movable movable) {
         this.movable = movable;
-    }
-
-    public MoveCommand(Movable movable, ChangeVelocityCommand changeVelocityCommand) {
-        this.movable = movable;
-        this.changeVelocityCommand = changeVelocityCommand;
     }
 
     @Override
@@ -28,9 +21,6 @@ public class MoveCommand implements Command {
 
         if (movable.getVelocity() == null)
             throw new CommandException("Cannot get velocity");
-
-        if (changeVelocityCommand != null)
-            changeVelocityCommand.execute();
 
         movable.setPosition(Vector.plus(movable.getPosition(), movable.getVelocity()));
     }

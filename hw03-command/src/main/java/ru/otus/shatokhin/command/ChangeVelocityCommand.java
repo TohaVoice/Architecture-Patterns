@@ -13,16 +13,12 @@ public class ChangeVelocityCommand<T extends Movable & Rotatable> implements Com
 
     private RotateCommand rotateCommand;
 
-    public ChangeVelocityCommand(T uObject, RotateCommand rotateCommand) {
+    public ChangeVelocityCommand(T uObject) {
         this.uObject = uObject;
-        this.rotateCommand = rotateCommand;
     }
 
     @Override
     public void execute() {
-        if (rotateCommand != null)
-            rotateCommand.execute();
-
         int direction = uObject.getDirection();
         int directionsNum = uObject.getDirectionsNum();
         int angularVelocity = uObject.getAngularVelocity();

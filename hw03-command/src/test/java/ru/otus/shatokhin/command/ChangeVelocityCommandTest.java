@@ -14,8 +14,6 @@ class ChangeVelocityCommandTest {
 
     private ChangeVelocityCommand changeVelocityCommand;
 
-    private RotateCommand rotateCommandMock;
-
     private ITestObject iTestObjectMock;
 
     private interface ITestObject extends Rotatable, Movable {
@@ -25,8 +23,7 @@ class ChangeVelocityCommandTest {
     @BeforeEach
     void setUp() {
         iTestObjectMock = mock(ITestObject.class);
-        rotateCommandMock = mock(RotateCommand.class);
-        changeVelocityCommand = new ChangeVelocityCommand(iTestObjectMock, rotateCommandMock);
+        changeVelocityCommand = new ChangeVelocityCommand(iTestObjectMock);
     }
 
     @Test
