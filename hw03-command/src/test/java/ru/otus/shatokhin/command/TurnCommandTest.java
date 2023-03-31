@@ -1,6 +1,7 @@
 package ru.otus.shatokhin.command;
 
 import org.junit.jupiter.api.*;
+import ru.otus.shatokhin.command.macro.TurnCommand;
 import ru.otus.shatokhin.domain.action.Movable;
 import ru.otus.shatokhin.domain.action.Rotatable;
 import ru.otus.shatokhin.model.Vector;

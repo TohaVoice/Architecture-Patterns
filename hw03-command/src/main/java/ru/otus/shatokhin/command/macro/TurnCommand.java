@@ -1,5 +1,8 @@
-package ru.otus.shatokhin.command;
+package ru.otus.shatokhin.command.macro;
 
+import ru.otus.shatokhin.command.ChangeVelocityCommand;
+import ru.otus.shatokhin.command.MoveCommand;
+import ru.otus.shatokhin.command.RotateCommand;
 import ru.otus.shatokhin.command.macro.MacroCommand;
 import ru.otus.shatokhin.domain.action.Movable;
 import ru.otus.shatokhin.domain.action.Rotatable;
